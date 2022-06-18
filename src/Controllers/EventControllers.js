@@ -27,8 +27,31 @@ const eventDelete = async (request, response) => {
   response.status(200).json(deleted);
 };
 
+const eventUpdate = async (request, response) => {
+  const { id } = request.params;
+  const event = request.body;
+  const result = await eventServices.eventUpdate(id, event);
+  response.status(200).json(result);
+};
+
+const eventUpdateImage = async (request, response) => {
+  const { id } = request.params;
+  const arrImage = request.files;
+  for (let i = 0; i < arrImage.length; i++) {
+    arrImage[i] = `${request.get("host")}/images/${arrImage[i].filename}`;
+  }
+  const event = JSON.parse(request.body.body);
+  const result = await eventServices.eventUpdateImage(id, {
+    ...event,
+    arrImage,
+  });
+  response.status(200).json(result);
+};
+
 module.exports = {
   eventCreate,
   findAll,
   eventDelete,
+  eventUpdate,
+  eventUpdateImage,
 };

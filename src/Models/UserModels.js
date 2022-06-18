@@ -43,6 +43,16 @@ const userDelete = async (id) => {
   return await db.deleteOne({ _id: ObjectId(id) });
 };
 
+const userUpdate = async (id, user) => {
+  const db = await getUsersCollection();
+  const updateUser = await db.findOneAndUpdate(
+    { _id: ObjectId(id) },
+    { $set: user },
+    { returnDocument: "after" }
+  );
+  return updateUser.value;
+};
+
 module.exports = {
   userCreate,
   findByName,
@@ -50,4 +60,5 @@ module.exports = {
   findAll,
   findByEmail,
   userDelete,
+  userUpdate,
 };

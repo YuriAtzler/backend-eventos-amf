@@ -45,8 +45,13 @@ const userDelete = async (id) => {
   }
 };
 
+const userUpdate = async (id, user) => {
+  return await userModels.userUpdate(id, user);
+};
+
 module.exports = {
   userCreate,
   findAll,
   userDelete,
+  userUpdate,
 };

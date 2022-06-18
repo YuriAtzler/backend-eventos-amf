@@ -26,8 +26,16 @@ const userDelete = async (request, response) => {
   response.status(200).json(deleted);
 };
 
+const userUpdate = async (request, response) => {
+  const { id } = request.params;
+  const user = request.body;
+  const result = await usersServices.userUpdate(id, user);
+  response.status(200).json(result);
+};
+
 module.exports = {
   userCreate,
   findAll,
   userDelete,
+  userUpdate,
 };

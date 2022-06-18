@@ -14,6 +14,13 @@ router.post(
   eventControllers.eventCreate
 );
 
+router.patch(
+  "/updateImage/:id",
+  upload.array("image", maxImage),
+  eventControllers.eventUpdateImage
+);
+router.patch("/update/:id", eventControllers.eventUpdate);
+
 router.get("/get", eventControllers.findAll);
 router.get("/delete/:id", eventControllers.eventDelete);
 

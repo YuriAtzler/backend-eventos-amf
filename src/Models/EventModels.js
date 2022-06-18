@@ -35,10 +35,32 @@ const eventDelete = async (id) => {
   return await db.deleteOne({ _id: ObjectId(id) });
 };
 
+const eventUpdate = async (id, event) => {
+  const db = await getEventCollection();
+  const updateEvent = await db.findOneAndUpdate(
+    { _id: ObjectId(id) },
+    { $set: event },
+    { returnDocument: "after" }
+  );
+  return updateEvent.value;
+};
+
+const eventUpdateImage = async (id, event) => {
+  const db = await getEventCollection();
+  const updateEvent = await db.findOneAndUpdate(
+    { _id: ObjectId(id) },
+    { $set: event },
+    { returnDocument: "after" }
+  );
+  return updateEvent.value;
+};
+
 module.exports = {
   eventCreate,
   findByNameEvent,
   findAll,
   eventDelete,
   findById,
+  eventUpdate,
+  eventUpdateImage,
 };

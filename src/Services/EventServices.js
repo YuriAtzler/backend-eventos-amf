@@ -16,7 +16,7 @@ const eventCreate = async (event) => {
   const eventNameUsed = await eventModels.findByNameEvent(event.nameEvent);
   if (eventNameUsed != null) {
     deleteImages(event);
-    throw new appError("Nome de envento já está em uso!", 409);
+    throw new appError("Nome de evento já está em uso!", 409);
   }
 
   return await eventModels.eventCreate(value);
@@ -60,8 +60,21 @@ const eventDelete = async (id) => {
   }
 };
 
+const eventUpdate = async (id, event) => {
+  return await eventModels.eventUpdate(id, event);
+};
+
+const eventUpdateImage = async (id, event) => {
+  const oldEvent = await eventModels.findById(id);
+  deleteImages(oldEvent);
+
+  return await eventModels.eventUpdateImage(id, event);
+};
+
 module.exports = {
   eventCreate,
   findAll,
   eventDelete,
+  eventUpdate,
+  eventUpdateImage,
 };
