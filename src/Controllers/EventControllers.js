@@ -3,12 +3,12 @@ const eventServices = require("../Services/EventServices");
 //Create event
 const eventCreate = async (request, response) => {
   const arrImage = request.files;
+  console.log(request.body.body);
   console.log(arrImage);
   for (let i = 0; i < arrImage.length; i++) {
     arrImage[i] = `${request.get("host")}/images/${arrImage[i].filename}`;
   }
   const event = JSON.parse(request.body.body);
-  console.log(event);
   const result = await eventServices.eventCreate({
     ...event,
     arrImage,
