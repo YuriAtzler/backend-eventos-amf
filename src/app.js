@@ -6,6 +6,7 @@ const uploadConfig = require("./config/multer");
 
 const app = express();
 
+app.use(express.json());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "*");
@@ -13,8 +14,6 @@ app.use((req, res, next) => {
   app.use(cors());
   next();
 });
-
-app.use(express.json());
 
 app.use("/images", express.static(uploadConfig.directory));
 
