@@ -3,7 +3,7 @@ const eventServices = require("../Services/EventServices");
 //Create event
 const eventCreate = async (request, response) => {
   const arrImage = request.files;
-  const event = JSON.parse(request.body.body);
+  const event = request.body.body;
   console.log(event);
   console.log(arrImage);
   for (let i = 0; i < arrImage.length; i++) {
